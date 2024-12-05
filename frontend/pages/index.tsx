@@ -1,6 +1,10 @@
 
-import { getGeoTIFFMetadata, downloadGeoTIFF } from "../lib/api";
+import dynamic from "next/dynamic";
+import { getGeoTIFFMetadata, downloadGeoTIFF } from "../lib/service";
 import {CustomMetaData} from "@/models/metadata.type"
+import "../app/globals.css";
+
+const GeoTIFFMap = dynamic(() => import('./Map'), { ssr: false, loading: () => <p>A map is loading</p>, });
 
 export async function getServerSideProps() {
     try {
@@ -19,6 +23,7 @@ export default function Home({metadata, error}: { metadata: CustomMetaData, erro
     return (
         <div>
             <h1>Satellite Data</h1>
+            <GeoTIFFMap />
             {metadata ? (
                 <div>
                     <p><strong>File Name:</strong> {metadata.file_name}</p>

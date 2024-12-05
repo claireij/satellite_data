@@ -1,9 +1,12 @@
+export type Bounds = [[number, number], [number, number]];
+
 export type CustomMetaData = {
     crs: string, 
     data_type: string,
     description: string,
     format: string,
     file_name: string
+    bounds: Bounds
 }
 
 export type FileMetaData = {
