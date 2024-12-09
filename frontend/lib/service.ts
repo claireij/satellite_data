@@ -1,7 +1,7 @@
 import { CustomMetaData } from "@/models/metadata.type";
 
 export async function getGeoTIFFMetadata() {
-    const response = await fetch("http://localhost:8000/data/query");
+    const response = await fetch("http://localhost:8000/data/metadata");
     if (!response.ok) {
         throw new Error("Failed to fetch metadata");
     }
@@ -27,7 +27,7 @@ export async function downloadGeoTIFF() {
 }
 
 export async function getTIFFImage() {
-    const response = await fetch('http://localhost:8000/generate-image')
+    const response = await fetch('http://localhost:8000/data/image')
     if (!response.ok) {
         throw new Error("Failed to generate image");
     }

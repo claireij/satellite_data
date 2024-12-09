@@ -47,7 +47,7 @@ def get_geotiff_data():
 def read_root():
     return {"message": "Welcome to satellite data"}
 
-@app.get("/data/query")
+@app.get("/data/metadata")
 def query_data():
         try:
             with get_geotiff_data() as dataset:
@@ -78,7 +78,7 @@ def query_data():
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/generate-image")
+@app.get("/data/image")
 async def generate_image():
     try:
         with get_geotiff_data() as dataset:
