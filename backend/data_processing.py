@@ -1,14 +1,14 @@
-from pyproj import Proj, transform
+from pyproj import Transformer
 import numpy as np
 from PIL import Image
 from io import BytesIO
 
 def transform_coordinates(dataset):
-    src_proj = Proj("epsg:32633")
-    dest_proj = Proj("epsg:4326")
+    transformer = Transformer.from_crs("epsg:32633", "epsg:4326")
+
     left, bottom, right, top = dataset.bounds
-    south_west = transform(src_proj, dest_proj, left, bottom)
-    north_east = transform(src_proj, dest_proj, right, top)
+    south_west = transformer.transform(left, bottom)
+    north_east = transformer.transform(right, top)
     return south_west, north_east
 
 def generate_image_from_raster(raster_data):
